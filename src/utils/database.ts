@@ -1,3 +1,4 @@
+import type { Tick } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
 // Deadline until next tick needs to be registered 24h
 const DEADLINE = (1000 * 60 * 60 * 24);
@@ -12,7 +13,7 @@ export async function next_deadline(user: string): Promise<Date | null> {
   // If last tick is older than deadline it is invalid
   const now = new Date();
   const diff: Date = new Date(now.getTime() - time.getTime());
-  if (diff.getTime() < DEADLINE) {
+  if (diff.getTime() > DEADLINE) {
     return null;
   }
   // Last tick is not older than deadline => return next next_deadline
@@ -21,8 +22,8 @@ export async function next_deadline(user: string): Promise<Date | null> {
   return newDate;
 }
 
-export async function tick(user: string) {
-  await prisma.$transaction(async (client) => {
+export async function tick(user: string) : Promise<Tick> {
+  return await prisma.$transaction(async (client) => {
     const first: boolean = await async function() {
       const res = await client.tick.findFirst({ where: { user: user }, orderBy: { time: "desc" }, select: { time: true } });
       if (!res) {
@@ -34,7 +35,7 @@ export async function tick(user: string) {
       const diff: Date = new Date(now.getTime() - time.getTime());
       return diff.getTime() >= DEADLINE
     }();
-    await client.tick.create({ data: { user: user, first: first } });
+    return await client.tick.create({ data: { user: user, first: first } });
   });
 }
 
