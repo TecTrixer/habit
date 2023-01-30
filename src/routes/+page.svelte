@@ -4,6 +4,7 @@
 </script>
 
 <div class="flex-row justify-center">
+  <!-- TODO: Persist user name and automaticall load users current streak -->
   <form method="POST">
     <label class="inline-block flex my-10 mx-auto">
     <div class="ml-auto">Name:</div>
@@ -11,6 +12,7 @@
     </label>
     <button class="btn-primary btn flex mt-10 btn-square mx-auto">TICK</button>
   </form>
+  <!-- TODO: Add a countdown here -->
   {#if form?.deadline}
     <p>{form?.deadline} {form?.streak}</p>
   {/if}

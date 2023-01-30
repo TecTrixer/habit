@@ -8,6 +8,7 @@ export const actions = {
     if (form) {
       const name = form.toString();
       console.log(name);
+      // TODO: Design these functions so that they don't do findFirst multiple times
       const res = await tick(name);
       console.log(res);
       const deadline = await next_deadline(name);
