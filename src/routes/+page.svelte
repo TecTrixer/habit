@@ -4,7 +4,7 @@
 </script>
 
 <div class="flex-row justify-center">
-  <!-- TODO: Persist user name and automaticall load users current streak -->
+  <!-- TODO: Persist user name and automatically load users current streak -->
   <form method="POST">
     <label class="inline-block flex my-10 mx-auto">
     <div class="ml-auto">Name:</div>
