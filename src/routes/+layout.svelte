@@ -37,7 +37,7 @@
             >You need to accept cookies, otherwise you cannot use this site. You
             will not be tracked through the stored information. The only
             information being stored is for your own convenience (e.g. so that
-            you don't need to login every time you reload the site).</span
+            you don't need to enter your name every time you reload the site).</span
           >
         </div>
       </div>
@@ -63,9 +63,7 @@
             />
           </svg>
           <span
-            >This website stores information (cookies, local storage) for
-            authentication with Github (and for storing your consent to this
-            banner)</span
+            >This website stores information (cookies, local storage) for your convenience!</span
           >
         </div>
         <div class="flex-none">
