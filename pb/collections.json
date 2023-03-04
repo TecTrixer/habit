@@ -79,7 +79,7 @@
                 "type": "text",
                 "system": false,
                 "required": true,
-                "unique": false,
+                "unique": true,
                 "options": {
                     "min": 1,
                     "max": 255,
@@ -105,7 +105,7 @@
         "listRule": "user.id = @request.auth.id",
         "viewRule": "user.id = @request.auth.id",
         "createRule": "user.id = @request.auth.id",
-        "updateRule": "user.id = @request.auth.id",
+        "updateRule": null,
         "deleteRule": "user.id = @request.auth.id",
         "options": {}
     },

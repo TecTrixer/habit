@@ -2,7 +2,7 @@ import PocketBase, { type AuthProviderInfo } from "pocketbase";
 
 import { PUBLIC_POCKETBASE_URL, PUBLIC_REDIRECT_URL } from '$env/static/public';
 
-const pb = new PocketBase(PUBLIC_POCKETBASE_URL);
+export const pb = new PocketBase(PUBLIC_POCKETBASE_URL);
 
 // returns the authUrl which can be redirected to for OAuth2
 export async function getAuthUrl(): Promise<string> {
