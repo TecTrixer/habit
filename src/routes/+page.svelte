@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
   import AddTask from "$lib/AddTask.svelte";
+  import TaskView from "$lib/TaskView.svelte";
   export let data: PageData;
   let loaded = false;
   setTimeout((_) => {
@@ -17,6 +18,7 @@
       >Click here to login</a
     >
   {:else if loaded}
+    <TaskView />
     <AddTask />
   {/if}
 </div>

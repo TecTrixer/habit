@@ -14,9 +14,7 @@
 
     pb.collection("tasks")
       .create(data)
-      .then((value) => {
-        console.log(value);
-      })
+      .then((_) => {})
       .catch((e) => {
         console.log(e);
       });
