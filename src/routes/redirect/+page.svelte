@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import PocketBase from "pocketbase";
+  import {PUBLIC_PAGE_URL} from "$env/static/public";
   import { onMount } from "svelte";
   import { authenticate, isLoggedIn } from "$lib/auth";
 
@@ -9,19 +9,29 @@
   onMount(async () => {
     if (data.code && !loggedIn) {
       await authenticate(data.provider, data.code);
-      console.log(isLoggedIn());
-      console.log(pb.authStore.model);
       loggedIn = isLoggedIn();
+      returned = true;
+      if (loggedIn) {
+        redirect();
+      }
+    } else {
+      redirect();
     }
   });
 
-  const pb = new PocketBase("http://127.0.0.1:8090");
+  function redirect() {
+    window.location.href = PUBLIC_PAGE_URL;
+  }
+
   let loggedIn = isLoggedIn();
+  let returned = false;
 </script>
 
 <div>
-  {#if loggedIn}
-    <p>{pb.authStore.model}</p>
+  {#if returned && !loggedIn}
+    <h1 class="text-center m-auto">
+      ERR: There was an error while logging in!
+    </h1>
   {:else}
     <h1 class="text-center m-auto">Authenticating...</h1>
   {/if}

@@ -1,6 +1,6 @@
 import type { PageLoad } from './$types';
-import { getAuthUrl } from "$lib/auth"
+import { getAuthUrl, isLoggedIn } from "$lib/auth"
 
 export const load = (async () => {
-  return { authUrl: await getAuthUrl() };
+  return { authUrl: await getAuthUrl(), loggedIn: isLoggedIn() };
 }) satisfies PageLoad;

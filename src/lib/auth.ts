@@ -1,12 +1,13 @@
-import PocketBase, { type AuthProviderInfo } from "pocketbase"
+import PocketBase, { type AuthProviderInfo } from "pocketbase";
 
-const pb = new PocketBase('http://127.0.0.1:8090');
-const redirectUrl = 'http://localhost:5173/redirect';
+import { PUBLIC_POCKETBASE_URL, PUBLIC_REDIRECT_URL } from '$env/static/public';
+
+const pb = new PocketBase(PUBLIC_POCKETBASE_URL);
 
 // returns the authUrl which can be redirected to for OAuth2
 export async function getAuthUrl(): Promise<string> {
   const provider = await getProvider();
-  return provider.authUrl + redirectUrl
+  return provider.authUrl + PUBLIC_REDIRECT_URL
 }
 
 export async function getProvider(): Promise<AuthProviderInfo> {
@@ -25,8 +26,7 @@ export async function authenticate(provider: AuthProviderInfo, code: string) {
     provider.name,
     code,
     provider.codeVerifier,
-    // TODO: maybe add a real redirect here
-    redirectUrl,
+    PUBLIC_REDIRECT_URL,
     {
       points: 0,
     }
