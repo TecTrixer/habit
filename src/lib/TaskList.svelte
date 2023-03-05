@@ -2,6 +2,7 @@
   import { pb } from "$lib/auth";
   import type { TaskWithStreak } from "$lib/types";
   import { onMount, onDestroy } from "svelte";
+  import TaskView from "$lib/TaskView.svelte"
   let tasks: TaskWithStreak[] = [];
   onMount(async () => {
     try {
@@ -71,11 +72,9 @@
           tasks = tasks;
         }
       } else if (data.action === "delete") {
-        const index = tasks.findIndex((val) => {
-          return val.taskId === data.record.task;
-        });
+        const index = tasks.findIndex((val) => {return val.taskId === data.record.task});
         if (index > -1) {
-          tasks.splice(index, 1);
+          tasks[index].streak = -1;
           tasks = tasks;
         }
       } else if (data.action === "update") {
@@ -95,6 +94,6 @@
 
 <div class="text-center mb-10 text-xl">
   {#each tasks as task}
-    <p class="my-2">{JSON.stringify(task)}</p>
+    <TaskView task={task}/>
   {/each}
 </div>
